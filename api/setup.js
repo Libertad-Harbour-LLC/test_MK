@@ -40,7 +40,11 @@ export async function GET(request) {
   }
 
   await telegram("setMyCommands", {
-    commands: [{ command: "start", description: "Начать и узнать, что умеет бот" }],
+    commands: [
+      { command: "start", description: "Начать и узнать, что умеет бот" },
+      { command: "zapis", description: "Оставить заявку на запись" },
+      { command: "contacts", description: "Адреса и телефоны салонов" },
+    ],
   });
   await telegram("setMyDescription", { description: WELCOME.slice(0, 512) });
   await telegram("setMyShortDescription", {
@@ -53,6 +57,9 @@ export async function GET(request) {
     "Готово! Бот подключён ✅",
     `<p>Telegram будет присылать сообщения на адрес <code>${url}</code>.</p>
 ${name ? `<p>Откройте бота и напишите ему вопрос: <a href="https://t.me/${name}">t.me/${name}</a></p>` : ""}
+${process.env.ADMIN_CHAT_ID
+  ? `<p>Заявки на запись будут приходить в чат <b>${process.env.ADMIN_CHAT_ID}</b>.</p>`
+  : `<p style="color:#c62828"><b>Заявки пока некуда отправлять.</b> Напишите боту команду /id в чате, куда должны приходить заявки, и вставьте полученный номер в настройку ADMIN_CHAT_ID в Vercel (инструкция, шаг 5).</p>`}
 <p>Эту страницу больше открывать не нужно. Если вы поменяете адрес сайта на Vercel, откройте её ещё раз.</p>`,
     true,
   );
