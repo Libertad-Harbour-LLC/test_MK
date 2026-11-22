@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/telegram.js": { "includeFiles": "knowledge/**", "maxDuration": 60 },
+    "api/setup.js": { "includeFiles": "knowledge/**", "maxDuration": 30 }
+  }
+}
